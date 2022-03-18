@@ -31,6 +31,21 @@ public class CartellaEsattoriale {
 	@JoinColumn(name = "contribuente_id", nullable = false)
 	private Contribuente contribuente;
 	
+	public CartellaEsattoriale() {}
+	public CartellaEsattoriale(String descrizione, int importo, Stato stato, Contribuente contribuente) {
+		this.descrizione = descrizione;
+		this.importo = importo;
+		this.stato = stato;
+		this.contribuente = contribuente;
+	}
+	public CartellaEsattoriale(Long id, String descrizione, int importo, Stato stato, Contribuente contribuente) {
+		this.id = id;
+		this.descrizione = descrizione;
+		this.importo = importo;
+		this.stato = stato;
+		this.contribuente = contribuente;
+	}
+	
 	public Long getId() {
 		return id;
 	}

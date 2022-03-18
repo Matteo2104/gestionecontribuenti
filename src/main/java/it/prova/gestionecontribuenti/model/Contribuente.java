@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+
 @Entity
 @Table(name="contribuente")
 public class Contribuente {
@@ -39,6 +40,25 @@ public class Contribuente {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "contribuente")
 	private Set<CartellaEsattoriale> cartelleEsattoriali = new HashSet<>();
 	
+	
+	public Contribuente() {
+		
+	}
+	public Contribuente(String nome, String cognome, Date dataDiNascita, String codiceFiscale, String indirizzo) {
+		this.nome = nome;
+		this.cognome = cognome;
+		this.dataDiNascita = dataDiNascita;
+		this.codiceFiscale = codiceFiscale;
+		this.indirizzo = indirizzo;
+	}
+	public Contribuente(Long id, String nome, String cognome, Date dataDiNascita, String codiceFiscale, String indirizzo) {
+		this.id = id;
+		this.nome = nome;
+		this.cognome = cognome;
+		this.dataDiNascita = dataDiNascita;
+		this.codiceFiscale = codiceFiscale;
+		this.indirizzo = indirizzo;
+	}
 	
 	public Long getId() {
 		return id;
