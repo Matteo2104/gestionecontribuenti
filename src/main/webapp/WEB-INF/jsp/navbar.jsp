@@ -22,10 +22,10 @@
             <a class="nav-link dropdown-toggle" href="#" id="dropdown07" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
             <ul class="dropdown-menu" aria-labelledby="dropdown07">
               <li><a class="dropdown-item" href="${pageContext.request.contextPath}/home">Home</a></li>
-              <li><a class="dropdown-item" href="${pageContext.request.contextPath}/regista/search">Ricerca Registi</a></li>
-              <li><a class="dropdown-item" href="${pageContext.request.contextPath}/regista/insert">Inserisci Regista</a></li>
-              <li><a class="dropdown-item" href="${pageContext.request.contextPath}/film/search">Ricerca Film</a></li>
-              <li><a class="dropdown-item" href="${pageContext.request.contextPath}/film/insert">Inserisci Film</a></li>
+              <li><a class="dropdown-item" href="${pageContext.request.contextPath}/contribuente/search">Ricerca Contribuenti</a></li>
+              <li><a class="dropdown-item" href="${pageContext.request.contextPath}/contribuente/insert">Inserisci Contribuente</a></li>
+              <li><a class="dropdown-item" href="${pageContext.request.contextPath}/cartellaesattoriale/search">Ricerca Cartelle Esattoriali</a></li>
+              <li><a class="dropdown-item" href="${pageContext.request.contextPath}/cartellaesattoriale/insert">Inserisci Cartella Esattoriale</a></li>
             </ul> 
           </li>
           <c:if test="${userInfo.isAdmin() }">
