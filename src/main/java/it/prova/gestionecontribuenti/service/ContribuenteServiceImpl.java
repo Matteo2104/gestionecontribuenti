@@ -36,6 +36,12 @@ public class ContribuenteServiceImpl implements ContribuenteService {
 	}
 	
 	@Override
+	@Transactional
+	public Contribuente caricaSingoloElemento(Long idContribuente) {
+		return repository.findById(idContribuente).orElse(null);
+	}
+	
+	@Override
 	@Transactional(readOnly = true)
 	public Page<Contribuente> findByExampleWithPagination(Contribuente example, Integer pageNo, Integer pageSize, String sortBy) {
 		Specification<Contribuente> specificationCriteria = (root, query, cb) -> {

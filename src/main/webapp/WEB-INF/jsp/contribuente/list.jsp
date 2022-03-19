@@ -65,9 +65,9 @@
 											<td><fmt:formatDate type = "date" value = "${contribuenteItem.dataDiNascita }" /></td>
 											<td>${contribuenteItem.codiceFiscale }</td>
 											<td>
-												<a class="btn  btn-sm btn-outline-secondary" href="${pageContext.request.contextPath}/regista/show/${registaItem.id }">Visualizza</a>
-												<a class="btn  btn-sm btn-outline-primary ml-2 mr-2" href="${pageContext.request.contextPath}/regista/edit/${registaItem.id }">Edit</a>
-												<a class="btn btn-outline-danger btn-sm" href="${pageContext.request.contextPath}/regista/delete/${registaItem.id }">Delete</a>
+												<a class="btn  btn-sm btn-outline-secondary" href="${pageContext.request.contextPath}/contribuente/show/${contribuenteItem.id }">Visualizza</a>
+												<a class="btn  btn-sm btn-outline-primary ml-2 mr-2" href="${pageContext.request.contextPath}/regista/edit/${contribuenteItem.id }">Edit</a>
+												<a class="btn btn-outline-danger btn-sm" href="${pageContext.request.contextPath}/regista/delete/${contribuenteItem.id }">Delete</a>
 											</td>
 										</tr>
 									</c:forEach>

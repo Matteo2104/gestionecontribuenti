@@ -15,4 +15,6 @@ public interface ContribuenteService {
 
 	public void aggiungiNuovo(Contribuente contribuente);
 
+	public Contribuente caricaSingoloElemento(Long idContribuente);
+
 }
