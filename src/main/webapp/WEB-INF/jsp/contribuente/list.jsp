@@ -58,18 +58,20 @@
 				                    </tr>
 				                </thead>
 				                <tbody>
-				                	<c:forEach items="${contribuente_list_attribute }" var="contribuenteItem">
-										<tr>
-											<td>${contribuenteItem.nome }</td>
-											<td>${contribuenteItem.cognome }</td>
-											<td><fmt:formatDate type = "date" value = "${contribuenteItem.dataDiNascita }" /></td>
-											<td>${contribuenteItem.codiceFiscale }</td>
+				                	<c:forEach items="${contribuente_map_attribute}" var="contribuenteItem">
+				                	   
+										<tr class="${contribuenteItem.value==true?'table-danger':''}">
+											<td>${contribuenteItem.key.nome }</td>
+											<td>${contribuenteItem.key.cognome }</td>
+											<td><fmt:formatDate type = "date" value = "${contribuenteItem.key.dataDiNascita }" /></td>
+											<td>${contribuenteItem.key.codiceFiscale }</td>
 											<td>
-												<a class="btn  btn-sm btn-outline-secondary" href="${pageContext.request.contextPath}/contribuente/show/${contribuenteItem.id }">Visualizza</a>
-												<a class="btn  btn-sm btn-outline-primary ml-2 mr-2" href="${pageContext.request.contextPath}/contribuente/edit/${contribuenteItem.id }">Edit</a>
-												<a class="btn btn-outline-danger btn-sm" href="${pageContext.request.contextPath}/contribuente/delete/${contribuenteItem.id }">Delete</a>
+												<a class="btn  btn-sm btn-outline-secondary" href="${pageContext.request.contextPath}/contribuente/show/${contribuenteItem.key.id }">Visualizza</a>
+												<a class="btn  btn-sm btn-outline-primary ml-2 mr-2" href="${pageContext.request.contextPath}/contribuente/edit/${contribuenteItem.key.id }">Edit</a>
+												<a class="btn btn-outline-danger btn-sm" href="${pageContext.request.contextPath}/contribuente/delete/${contribuenteItem.key.id }">Delete</a>
 											</td>
 										</tr>
+										
 									</c:forEach>
 				                </tbody>
 				            </table>

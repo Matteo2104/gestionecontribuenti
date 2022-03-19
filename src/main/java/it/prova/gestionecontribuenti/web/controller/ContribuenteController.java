@@ -1,6 +1,8 @@
 package it.prova.gestionecontribuenti.web.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -24,7 +26,9 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import it.prova.gestionecontribuenti.dto.ContribuenteDTO;
+import it.prova.gestionecontribuenti.model.CartellaEsattoriale;
 import it.prova.gestionecontribuenti.model.Contribuente;
+import it.prova.gestionecontribuenti.model.Stato;
 import it.prova.gestionecontribuenti.service.ContribuenteService;
 
 
@@ -39,8 +43,23 @@ public class ContribuenteController {
 	@GetMapping
 	public ModelAndView listAll() {
 		ModelAndView mv = new ModelAndView();
-		List<Contribuente> results = contribuenteService.listAllElements();
-		mv.addObject("contribuente_list_attribute", results);
+		List<Contribuente> resultList = contribuenteService.listAllElements();
+		Map<ContribuenteDTO, Boolean> map = new HashMap<>();
+		
+		boolean check;
+		for (Contribuente contribuente : resultList) {
+			check=false;
+			for (CartellaEsattoriale cartella : contribuente.getCartelleEsattoriali()) {
+				if (cartella.getStato().equals(Stato.IN_CONTENZIOSO)) {
+					map.put(ContribuenteDTO.buildContribuenteDTOFromModel(contribuente), true);
+					check=true;
+				}
+			}
+			if (!check) {
+				map.put(ContribuenteDTO.buildContribuenteDTOFromModel(contribuente), false);
+			}
+		}
+		mv.addObject("contribuente_map_attribute", map);
 		mv.setViewName("contribuente/list");
 		return mv;
 	}
@@ -53,8 +72,24 @@ public class ContribuenteController {
 	}
 	@PostMapping("/find")
 	public String find(ContribuenteDTO example, Model model) {
-		List<ContribuenteDTO> resultList = ContribuenteDTO.createContribuenteDTOListFromModelList(contribuenteService.findByExampleWithPagination(example.buildContribuenteModel(), null, null, null).toList());
-		model.addAttribute("contribuente_list_attribute", resultList);
+		List<Contribuente> resultList = contribuenteService.findByExampleWithPagination(example.buildContribuenteModel(), null, null, null).toList();
+		Map<ContribuenteDTO, Boolean> map = new HashMap<>();
+		
+		boolean check;
+		for (Contribuente contribuente : resultList) {
+			check=false;
+			for (CartellaEsattoriale cartella : contribuente.getCartelleEsattoriali()) {
+				if (cartella.getStato().equals(Stato.IN_CONTENZIOSO)) {
+					map.put(ContribuenteDTO.buildContribuenteDTOFromModel(contribuente), true);
+					check=true;
+				}
+			}
+			if (!check) {
+				map.put(ContribuenteDTO.buildContribuenteDTOFromModel(contribuente), false);
+			}
+		}
+		
+		model.addAttribute("contribuente_map_attribute", map);
 		return "contribuente/list";
 	}
 	

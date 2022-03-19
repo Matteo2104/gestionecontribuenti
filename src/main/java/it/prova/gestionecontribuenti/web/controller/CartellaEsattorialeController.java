@@ -92,7 +92,7 @@ public class CartellaEsattorialeController {
 		cartellaEsattorialeService.aggiungiNuovo(cartellaEsattorialeDTO.buildCartellaEsattorialeModel());
 
 		redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
-		return "redirect:/contribuente";
+		return "redirect:/cartellaesattoriale";
 	}
 	
 	/*
