@@ -13,4 +13,6 @@ public interface ContribuenteService {
 
 	public List<Contribuente> listAllElements();
 
+	public void aggiungiNuovo(Contribuente contribuente);
+
 }

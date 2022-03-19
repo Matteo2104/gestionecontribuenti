@@ -42,7 +42,7 @@
 				    </div>
 				    <div class='card-body'>
 				    	<a class="btn btn-primary " href="${pageContext.request.contextPath}/contribuente/insert">Add New</a>
-				    	<a href="${pageContext.request.contextPath }/regista/search" class='btn btn-outline-secondary' >
+				    	<a href="${pageContext.request.contextPath }/contribuente/search" class='btn btn-outline-secondary' >
 				            <i class='fa fa-chevron-left'></i> Torna alla Ricerca
 				        </a>
 				    

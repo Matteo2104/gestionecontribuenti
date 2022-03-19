@@ -50,24 +50,24 @@ public class ContribuenteController {
 		return "contribuente/list";
 	}
 	
-	/*
+	
 	// CICLO INSERIMENTO
 	@GetMapping("/insert")
 	public String insert(Model model) {
-		model.addAttribute("insert_impiegato_attr", new Impiegato());
-		return "impiegato/insert";
+		model.addAttribute("insert_contribuente_attr", new ContribuenteDTO());
+		return "contribuente/insert";
 	}
 	@PostMapping("/save")
-	public String save(@Valid @ModelAttribute("insert_impiegato_attr") Impiegato impiegato, BindingResult result,
+	public String save(@Valid @ModelAttribute("insert_contribuente_attr") ContribuenteDTO contribuenteDTO, BindingResult result,
 			RedirectAttributes redirectAttrs) {
 
 		if (result.hasErrors())
-			return "impiegato/insert";
+			return "contribuente/insert";
 
-		impiegatoService.inserisciNuovo(impiegato);
+		contribuenteService.aggiungiNuovo(contribuenteDTO.buildContribuenteModel());
 
 		redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
-		return "redirect:/impiegato";
+		return "redirect:/contribuente";
 	}
-	*/
+	
 }
