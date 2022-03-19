@@ -36,9 +36,15 @@ public class ContribuenteServiceImpl implements ContribuenteService {
 	}
 	
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	public Contribuente caricaSingoloElemento(Long idContribuente) {
 		return repository.findById(idContribuente).orElse(null);
+	}
+	
+	@Override
+	@Transactional
+	public void rimuovi(Long id) {
+		repository.deleteById(id);
 	}
 	
 	@Override

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -77,6 +78,26 @@ public class ContribuenteController {
 	public String show(@PathVariable Long idContribuente, Model model) {
 		model.addAttribute("show_contribuente_attr", ContribuenteDTO.buildContribuenteDTOFromModel(contribuenteService.caricaSingoloElemento(idContribuente)));
 		return "contribuente/show";
+	}
+	
+	
+	// CICLO RIMOZIONE
+	@GetMapping("/delete/{idContribuente}")
+	public String delete(@PathVariable Long idContribuente, Model model) {
+		ContribuenteDTO contribuenteTemp = ContribuenteDTO
+				.buildContribuenteDTOFromModel(contribuenteService.caricaSingoloElemento(idContribuente));
+		model.addAttribute("delete_contribuente_attr", contribuenteTemp);
+		return "contribuente/delete";
+	}
+	@PostMapping("/remove")
+	public String remove(@RequestParam(required=true) Long idContribuente,
+			RedirectAttributes redirectAttrs) {
+
+		//System.out.println(idContribuente);
+		contribuenteService.rimuovi(idContribuente);
+		
+		redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
+		return "redirect:/contribuente";
 	}
 	
 }

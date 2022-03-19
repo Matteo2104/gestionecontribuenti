@@ -17,4 +17,6 @@ public interface ContribuenteService {
 
 	public Contribuente caricaSingoloElemento(Long idContribuente);
 
+	public void rimuovi(Long id);
+
 }
