@@ -19,4 +19,6 @@ public interface ContribuenteService {
 
 	public void rimuovi(Long id);
 
+	public void aggiorna(Contribuente contribuente);
+
 }

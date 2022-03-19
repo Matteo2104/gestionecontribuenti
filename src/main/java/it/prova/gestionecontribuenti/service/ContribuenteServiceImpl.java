@@ -48,6 +48,12 @@ public class ContribuenteServiceImpl implements ContribuenteService {
 	}
 	
 	@Override
+	@Transactional
+	public void aggiorna(Contribuente contribuente) {
+		repository.save(contribuente);
+	}
+	
+	@Override
 	@Transactional(readOnly = true)
 	public Page<Contribuente> findByExampleWithPagination(Contribuente example, Integer pageNo, Integer pageSize, String sortBy) {
 		Specification<Contribuente> specificationCriteria = (root, query, cb) -> {

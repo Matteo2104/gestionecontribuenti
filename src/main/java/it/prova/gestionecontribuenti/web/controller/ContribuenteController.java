@@ -59,9 +59,10 @@ public class ContribuenteController {
 		model.addAttribute("insert_contribuente_attr", new ContribuenteDTO());
 		return "contribuente/insert";
 	}
+
 	@PostMapping("/save")
-	public String save(@Valid @ModelAttribute("insert_contribuente_attr") ContribuenteDTO contribuenteDTO, BindingResult result,
-			RedirectAttributes redirectAttrs) {
+	public String save(@Valid @ModelAttribute("insert_contribuente_attr") ContribuenteDTO contribuenteDTO,
+			BindingResult result, RedirectAttributes redirectAttrs) {
 
 		if (result.hasErrors())
 			return "contribuente/insert";
@@ -84,9 +85,8 @@ public class ContribuenteController {
 	// CICLO RIMOZIONE
 	@GetMapping("/delete/{idContribuente}")
 	public String delete(@PathVariable Long idContribuente, Model model) {
-		ContribuenteDTO contribuenteTemp = ContribuenteDTO
-				.buildContribuenteDTOFromModel(contribuenteService.caricaSingoloElemento(idContribuente));
-		model.addAttribute("delete_contribuente_attr", contribuenteTemp);
+		model.addAttribute("delete_contribuente_attr", ContribuenteDTO
+				.buildContribuenteDTOFromModel(contribuenteService.caricaSingoloElemento(idContribuente)));
 		return "contribuente/delete";
 	}
 	@PostMapping("/remove")
@@ -100,4 +100,30 @@ public class ContribuenteController {
 		return "redirect:/contribuente";
 	}
 	
+	
+	// CICLO MODIFICA
+	@GetMapping("/edit/{idContribuente}")
+	public String edit(@PathVariable Long idContribuente, Model model) {
+		ContribuenteDTO contribuenteTemp = ContribuenteDTO
+				.buildContribuenteDTOFromModel(contribuenteService.caricaSingoloElemento(idContribuente));
+		model.addAttribute("edit_contribuente_attr", contribuenteTemp);
+		return "contribuente/edit";
+	}
+	
+	@PostMapping("/update")
+	public String remove(@Valid @ModelAttribute("edit_contribuente_attr") ContribuenteDTO contribuenteDTO, BindingResult result,
+			RedirectAttributes redirectAttrs) {
+		System.out.println(contribuenteDTO);
+		
+		if (result.hasErrors())
+			return "contribuente/edit";
+		
+		
+		contribuenteService.aggiorna(contribuenteDTO.buildContribuenteModel());
+		
+		redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
+		return "redirect:/contribuente";
+	}
+	
+
 }
