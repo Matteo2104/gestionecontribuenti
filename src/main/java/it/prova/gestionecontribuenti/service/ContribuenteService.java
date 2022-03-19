@@ -21,4 +21,6 @@ public interface ContribuenteService {
 
 	public void aggiorna(Contribuente contribuente);
 
+	public List<Contribuente> cercaByCognomeENomeILike(String term);
+
 }

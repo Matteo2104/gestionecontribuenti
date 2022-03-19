@@ -87,4 +87,10 @@ public class ContribuenteServiceImpl implements ContribuenteService {
 
 		return repository.findAll(specificationCriteria, paging);
 	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public List<Contribuente> cercaByCognomeENomeILike(String term) {
+		return repository.findByCognomeIgnoreCaseContainingOrNomeIgnoreCaseContainingOrderByNomeAsc(term, term);
+	}
 }

@@ -16,12 +16,12 @@ public class CartellaEsattorialeDTO {
 	
 	private Long id;
 	
-	@NotBlank(message = "{titolo.notblank}")
+	@NotBlank(message = "{descrizione.notblank}")
 	private String descrizione;
 	
 	@NotNull(message = "{importo.notnull}")
 	@Min(1)
-	private int importo;
+	private Integer importo;
 	
 	@NotNull(message = "{stato.notnull}")
 	private Stato stato;
@@ -30,20 +30,20 @@ public class CartellaEsattorialeDTO {
 	private ContribuenteDTO contribuente;
 	
 	public CartellaEsattorialeDTO() {}
-	public CartellaEsattorialeDTO(Long id, String descrizione, int importo, Stato stato, ContribuenteDTO contribuente) {
+	public CartellaEsattorialeDTO(Long id, String descrizione, Integer importo, Stato stato, ContribuenteDTO contribuente) {
 		this.id = id;
 		this.descrizione = descrizione;
 		this.importo = importo;
 		this.stato = stato;
 		this.contribuente = contribuente;
 	}
-	public CartellaEsattorialeDTO(Long id, String descrizione, int importo, Stato stato) {
+	public CartellaEsattorialeDTO(Long id, String descrizione, Integer importo, Stato stato) {
 		this.id = id;
 		this.descrizione = descrizione;
 		this.importo = importo;
 		this.stato = stato;
 	}
-	public CartellaEsattorialeDTO(String descrizione, int importo, Stato stato, ContribuenteDTO contribuente) {
+	public CartellaEsattorialeDTO(String descrizione, Integer importo, Stato stato, ContribuenteDTO contribuente) {
 		this.descrizione = descrizione;
 		this.importo = importo;
 		this.stato = stato;
@@ -58,7 +58,7 @@ public class CartellaEsattorialeDTO {
 		return descrizione;
 	}
 
-	public int getImporto() {
+	public Integer getImporto() {
 		return importo;
 	}
 
@@ -78,7 +78,7 @@ public class CartellaEsattorialeDTO {
 		this.descrizione = descrizione;
 	}
 
-	public void setImporto(int importo) {
+	public void setImporto(Integer importo) {
 		this.importo = importo;
 	}
 
@@ -105,7 +105,7 @@ public class CartellaEsattorialeDTO {
 		return result;
 	}
 
-	public static List<CartellaEsattorialeDTO> createFilmDTOListFromModelList(List<CartellaEsattoriale> modelListInput, boolean includeContribuente) {
+	public static List<CartellaEsattorialeDTO> createCartellaEsattorialeDTOListFromModelList(List<CartellaEsattoriale> modelListInput, boolean includeContribuente) {
 		return modelListInput.stream().map(cartellaEsattorialeEntity -> {
 			return CartellaEsattorialeDTO.buildCartellaEsattorialeDTOFromModel(cartellaEsattorialeEntity, includeContribuente);
 		}).collect(Collectors.toList());
