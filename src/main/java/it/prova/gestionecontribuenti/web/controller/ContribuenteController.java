@@ -142,9 +142,16 @@ public class ContribuenteController {
 	
 	// CICLO RIMOZIONE
 	@GetMapping("/delete/{idContribuente}")
-	public String delete(@PathVariable Long idContribuente, Model model) {
+	public String delete(@PathVariable Long idContribuente, Model model, RedirectAttributes redirect) {
+		Contribuente contribuente = contribuenteService.caricaSingoloElementoEager(idContribuente);
 		model.addAttribute("delete_contribuente_attr", ContribuenteDTO
-				.buildContribuenteDTOFromModel(contribuenteService.caricaSingoloElemento(idContribuente)));
+				.buildContribuenteDTOFromModel(contribuente));
+		
+		if (!contribuente.getCartelleEsattoriali().isEmpty()) {
+			redirect.addFlashAttribute("errorMessage", "Operazione non permessa: non si può cancellare un contribuente con delle cartelle attive");
+			return "redirect:/contribuente";
+		}
+		
 		return "contribuente/delete";
 	}
 	@PostMapping("/remove")
