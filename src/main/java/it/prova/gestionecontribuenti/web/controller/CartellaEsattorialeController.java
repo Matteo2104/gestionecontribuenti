@@ -98,30 +98,32 @@ public class CartellaEsattorialeController {
 	// CICLO VISUALIZZA
 	@GetMapping("/show/{idCartella}")
 	public String show(@PathVariable Long idCartella, Model model) {
-		model.addAttribute("show_cartella_attr", CartellaEsattorialeDTO.buildCartellaEsattorialeDTOFromModel(cartellaEsattorialeService.caricaSingoloElementoEager(idCartella), true));
+		model.addAttribute("show_cartella_attr", CartellaEsattorialeDTO.buildCartellaEsattorialeDTOFromModel(
+				cartellaEsattorialeService.caricaSingoloElementoEager(idCartella), true));
 		return "cartellaesattoriale/show";
 	}
 	
-	/*
+	
 	// CICLO RIMOZIONE
-	@GetMapping("/delete/{idContribuente}")
-	public String delete(@PathVariable Long idContribuente, Model model) {
-		model.addAttribute("delete_contribuente_attr", ContribuenteDTO
-				.buildContribuenteDTOFromModel(contribuenteService.caricaSingoloElemento(idContribuente)));
-		return "contribuente/delete";
+	@GetMapping("/delete/{idCartella}")
+	public String delete(@PathVariable Long idCartella, Model model) {
+		model.addAttribute("delete_cartella_attr", CartellaEsattorialeDTO.buildCartellaEsattorialeDTOFromModel(
+				cartellaEsattorialeService.caricaSingoloElementoEager(idCartella), true));
+		return "cartellaesattoriale/delete";
 	}
+	
 	@PostMapping("/remove")
-	public String remove(@RequestParam(required=true) Long idContribuente,
+	public String remove(@RequestParam(required=true) Long idCartella,
 			RedirectAttributes redirectAttrs) {
 
 		//System.out.println(idContribuente);
-		contribuenteService.rimuovi(idContribuente);
+		cartellaEsattorialeService.rimuovi(idCartella);
 		
 		redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
-		return "redirect:/contribuente";
+		return "redirect:/cartellaesattoriale";
 	}
 	
-	
+	/*
 	// CICLO MODIFICA
 	@GetMapping("/edit/{idContribuente}")
 	public String edit(@PathVariable Long idContribuente, Model model) {
