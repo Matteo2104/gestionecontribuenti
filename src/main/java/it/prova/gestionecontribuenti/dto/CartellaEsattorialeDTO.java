@@ -110,14 +110,15 @@ public class CartellaEsattorialeDTO {
 			return CartellaEsattorialeDTO.buildCartellaEsattorialeDTOFromModel(cartellaEsattorialeEntity, includeContribuente);
 		}).collect(Collectors.toList());
 	}
-	
-	
-
 	@Override
 	public String toString() {
 		return "CartellaEsattorialeDTO [id=" + id + ", descrizione=" + descrizione + ", importo=" + importo + ", stato="
-				+ stato + "]";
+				+ stato + ", contribuente=" + contribuente + "]";
 	}
+	
+	
+
+	
 	
 	
 }

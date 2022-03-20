@@ -7,13 +7,17 @@
 	 
 	 	<!-- Common imports in pages -->
 	 	<jsp:include page="../header.jsp" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/jqueryUI/jquery-ui.min.css" />
 		<style>
-			.error_field {
-				color: red;
+			.ui-autocomplete-loading {
+				background: white url("../assets/img/jqueryUI/anim_16x16.gif") right center no-repeat;
 			}
+			.error_field {
+		        color: red; 
+		    }
 		</style>
 
-<title>Modifica Contribuente</title>
+<title>Modifica Cartella Esattoriale</title>
 	 </head>
 	   <body class="d-flex flex-column h-100">
 	   
@@ -26,7 +30,7 @@
 			  <div class="container">
 			  
 			  		<%-- se l'attributo in request ha errori --%>
-					<spring:hasBindErrors  name="edit_contribuente_attr">
+					<spring:hasBindErrors  name="edit_cartella_attr">
 						<%-- alert errori --%>
 						<div class="alert alert-danger " role="alert">
 							Attenzione!! Sono presenti errori di validazione
@@ -48,61 +52,58 @@
 			  
 			  <div class='card'>
 				    <div class='card-header'>
-				        <h5>Aggiorna Contribuente</h5> 
+				        <h5>Aggiorna Cartella Esattoriale</h5> 
 				    </div>
 				    <div class='card-body'>
 		
 							<h6 class="card-title">I campi con <span class="text-danger">*</span> sono obbligatori</h6>
 		
 		
-							<form:form modelAttribute="edit_contribuente_attr" method="post" action="${pageContext.request.contextPath}/contribuente/update" class="row g-3" novalidate="novalidate">
-							<input type="text" hidden="" name="id" value="${edit_contribuente_attr.id}">	
+							<form:form modelAttribute="edit_cartella_attr" method="post" action="${pageContext.request.contextPath}/cartellaesattoriale/update" class="row g-3" novalidate="novalidate">
+							<input type="text" hidden="" name="id" value="${edit_cartella_attr.id}">	
+							
 							
 								<div class="col-md-6">
-									<label for="nome" class="form-label">Nome <span class="text-danger">*</span></label>
-									<spring:bind path="nome">
-										<input type="text" name="nome" id="nome" class="form-control ${status.error ? 'is-invalid' : ''}" placeholder="Inserire il nome" value="${edit_contribuente_attr.nome }" required>
+									<label for="descrizione" class="form-label">Descrizione <span class="text-danger">*</span></label>
+									<spring:bind path="descrizione">
+										<input type="text" name="descrizione" id="descrizione" class="form-control ${status.error ? 'is-invalid' : ''}" placeholder="Inserire la descrizione" value="${edit_cartella_attr.descrizione }" required>
 									</spring:bind>
-									<form:errors  path="nome" cssClass="error_field" />
+									<form:errors  path="descrizione" cssClass="error_field" />
 								</div>
 								
 								<div class="col-md-6">
-									<label for="cognome" class="form-label">Cognome <span class="text-danger">*</span></label>
-									<spring:bind path="cognome">
-										<input type="text" name="cognome" id="cognome" class="form-control ${status.error ? 'is-invalid' : ''}" placeholder="Inserire il cognome" value="${edit_contribuente_attr.cognome }" required>
+									<label for="importo" class="form-label">Importo <span class="text-danger">*</span></label>
+									<spring:bind path="importo">
+										<input type="text" name="importo" id="importo" class="form-control ${status.error ? 'is-invalid' : ''}" placeholder="Inserire l'importo" value="${edit_cartella_attr.importo }" required>
 									</spring:bind>
-									<form:errors  path="cognome" cssClass="error_field" />
+									<form:errors  path="importo" cssClass="error_field" />
 								</div>
-							
 								
-								<fmt:formatDate pattern='yyyy-MM-dd' var="parsedDate" type='date' value='${edit_contribuente_attr.dataDiNascita}' />
 								<div class="col-md-3">
-									<label for="dataDiNascita" class="form-label">Data di Nascita <span class="text-danger">*</span></label>
-                        			<spring:bind path="dataDiNascita">
-	                        		<input class="form-control ${status.error ? 'is-invalid' : ''}" id="dataDiNascita" type="date" placeholder="dd/MM/yy"
-	                            		title="formato : gg/mm/aaaa"  name="dataDiNascita" required 
-	                            		value="${parsedDate}" >
-		                            </spring:bind>
-	                            	<form:errors  path="dataDiNascita" cssClass="error_field" />
+									<label for="stato" class="form-label">Stato <span class="text-danger">*</span></label>
+								    <spring:bind path="stato">
+									    <select class="form-select ${status.error ? 'is-invalid' : ''}" id="stato" name="stato" required>
+									    	<option value="" selected> - Selezionare - </option>
+									      	<option value="CREATA" ${edit_cartella_attr.stato == 'CREATA'?'selected':''} >Creata</option>
+									      	<option value="IN_VERIFICA" ${edit_cartella_attr.stato == 'IN_VERIFICA'?'selected':''} >In Verifica</option>
+									      	<option value="CONCLUSA" ${edit_cartella_attr.stato == 'CONCLUSA'?'selected':''} >Conclusa</option>
+									      	<option value="IN_CONTENZIOSO" ${edit_cartella_attr.stato == 'IN_CONTENZIOSO'?'selected':''} >In Contenzioso</option>
+									    </select>
+								    </spring:bind>
+								    <form:errors  path="stato" cssClass="error_field" />
 								</div>
-								
 								
 								<div class="col-md-6">
-									<label for="codiceFiscale" class="form-label">Codice Fiscale <span class="text-danger">*</span></label>
-									<spring:bind path="codiceFiscale">
-										<input type="text" name="codiceFiscale" id="codiceFiscale" class="form-control ${status.error ? 'is-invalid' : ''}" placeholder="Inserire il Codice Fiscale" value="${edit_contribuente_attr.codiceFiscale }" required>
-									</spring:bind>
-									<form:errors  path="codiceFiscale" cssClass="error_field" />
-								</div>
+										<label for="contribuenteSearchInput" class="form-label">Contribuente:</label>
+										<spring:bind path="contribuente">
+											<input class="form-control ${status.error ? 'is-invalid' : ''}" type="text" id="contribuenteSearchInput"
+												name="contribuenteInput" value="${edit_cartella_attr.contribuente.nome}${empty edit_cartella_attr.contribuente.nome?'':' '}${edit_cartella_attr.contribuente.cognome}">
+										</spring:bind>
+										<input type="hidden" name="contribuente.id" id="contribuenteId" value="${edit_cartella_attr.contribuente.id}">
+										<form:errors  path="contribuente" cssClass="error_field" />
+									</div>
 								
 								
-								<div class="col-md-6">
-									<label for="indirizzo" class="form-label">Indirizzo <span class="text-danger">*</span></label>
-									<spring:bind path="indirizzo">
-										<input type="text" name="indirizzo" id="indirizzo" class="form-control ${status.error ? 'is-invalid' : ''}" placeholder="Inserire indirizzo" value="${edit_contribuente_attr.indirizzo }" required>
-									</spring:bind>
-									<form:errors  path="indirizzo" cssClass="error_field" />
-								</div>
 								
 								
 							<div class="col-12">
@@ -110,7 +111,42 @@
 							</div>
 		
 						</form:form>
-  
+		
+						
+  								<%-- FUNZIONE JQUERY UI PER AUTOCOMPLETE --%>
+								<script>
+									$("#contribuenteSearchInput").autocomplete({
+										 source: function(request, response) {
+										        $.ajax({
+										            url: "../../contribuente/searchContribuentiAjax",
+										            datatype: "json",
+										            data: {
+										                term: request.term,   
+										            },
+										            success: function(data) {
+										                response($.map(data, function(item) {
+										                    return {
+											                    label: item.label,
+											                    value: item.value
+										                    }
+										                }))
+										            }
+										        })
+										    },
+										//quando seleziono la voce nel campo deve valorizzarsi la descrizione
+									    focus: function(event, ui) {
+									        $("#contribuenteSearchInput").val(ui.item.label)
+									        return false
+									    },
+									    minLength: 2,
+									    //quando seleziono la voce nel campo hidden deve valorizzarsi l'id
+									    select: function( event, ui ) {
+									    	$('#contribuenteId').val(ui.item.value);
+									    	//console.log($('#registaId').val())
+									        return false;
+									    }
+									});
+								</script>
 				    
 				    
 					<!-- end card-body -->			   

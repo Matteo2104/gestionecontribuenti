@@ -123,28 +123,37 @@ public class CartellaEsattorialeController {
 		return "redirect:/cartellaesattoriale";
 	}
 	
-	/*
+	
 	// CICLO MODIFICA
-	@GetMapping("/edit/{idContribuente}")
-	public String edit(@PathVariable Long idContribuente, Model model) {
-		ContribuenteDTO contribuenteTemp = ContribuenteDTO
-				.buildContribuenteDTOFromModel(contribuenteService.caricaSingoloElemento(idContribuente));
-		model.addAttribute("edit_contribuente_attr", contribuenteTemp);
-		return "contribuente/edit";
-	}
-	@PostMapping("/update")
-	public String remove(@Valid @ModelAttribute("edit_contribuente_attr") ContribuenteDTO contribuenteDTO, BindingResult result,
-			RedirectAttributes redirectAttrs) {
-		System.out.println(contribuenteDTO);
-		
-		if (result.hasErrors())
-			return "contribuente/edit";
-
-		contribuenteService.aggiorna(contribuenteDTO.buildContribuenteModel());
-		
-		redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
-		return "redirect:/contribuente";
+	@GetMapping("/edit/{idCartella}")
+	public String edit(@PathVariable Long idCartella, Model model) {
+		CartellaEsattorialeDTO cartellaTemp = CartellaEsattorialeDTO.buildCartellaEsattorialeDTOFromModel(cartellaEsattorialeService.caricaSingoloElementoEager(idCartella), true);
+		model.addAttribute("edit_cartella_attr", cartellaTemp);
+		return "cartellaesattoriale/edit";
 	}
 	
-	*/
+	@PostMapping("/update")
+	public String remove(@Valid @ModelAttribute("edit_cartella_attr") CartellaEsattorialeDTO cartellaEsattorialeDTO, BindingResult result,
+			RedirectAttributes redirectAttrs) {
+		//System.out.println(cartellaEsattorialeDTO);
+		
+		if (cartellaEsattorialeDTO.getContribuente() == null || cartellaEsattorialeDTO.getContribuente().getId() == null)
+			result.rejectValue("contribuente", "contribuente.notnull");
+		else
+			cartellaEsattorialeDTO.setContribuente(ContribuenteDTO.buildContribuenteDTOFromModel(contribuenteService.caricaSingoloElemento(cartellaEsattorialeDTO.getContribuente().getId())));
+
+		
+		if (result.hasErrors())
+			return "cartellaesattoriale/edit";
+		
+		//System.out.println(cartellaEsattorialeDTO);
+		
+		cartellaEsattorialeService.aggiorna(cartellaEsattorialeDTO.buildCartellaEsattorialeModel());
+		
+		
+		redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
+		return "redirect:/cartellaesattoriale";
+	}
+	
+	
 }
