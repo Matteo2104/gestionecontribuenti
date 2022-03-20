@@ -6,7 +6,7 @@
 	 	<!-- Common imports in pages -->
 	 	<jsp:include page="../header.jsp" />
 	 	
-	   <title>Visualizza Contribuente</title>
+	   <title>Visualizza Cartella Esattoriale</title>
 	   
 	 </head>
 	   <body class="d-flex flex-column h-100">
@@ -21,47 +21,70 @@
 			  
 			  		<div class='card'>
 					    <div class='card-header'>
-					        <h5>Visualizza dettagli Contribuente</h5>
+					        <h5>Visualizza dettagli Cartella Esattoriale</h5>
 					    </div>
 					    
 					
 					    <div class='card-body'>
 					    	<dl class="row">
 							  <dt class="col-sm-3 text-right">Id:</dt>
-							  <dd class="col-sm-9">${show_contribuente_attr.id}</dd>
+							  <dd class="col-sm-9">${show_cartella_attr.id}</dd>
 					    	</dl>
 					    	
 					    	<dl class="row">
-							  <dt class="col-sm-3 text-right">Nome:</dt>
-							  <dd class="col-sm-9">${show_contribuente_attr.nome}</dd>
+							  <dt class="col-sm-3 text-right">Descrizione:</dt>
+							  <dd class="col-sm-9">${show_cartella_attr.descrizione}</dd>
 					    	</dl>
 					    	
 					    	<dl class="row">
-							  <dt class="col-sm-3 text-right">Cognome:</dt>
-							  <dd class="col-sm-9">${show_contribuente_attr.cognome}</dd>
+							  <dt class="col-sm-3 text-right">Importo:</dt>
+							  <dd class="col-sm-9">${show_cartella_attr.importo}</dd>
 					    	</dl>
 					    	
-					    	<dl class="row">
-							  <dt class="col-sm-3 text-right">Data di Nascita:</dt>
-							  <dd class="col-sm-9"><fmt:formatDate type="date" value = "${show_contribuente_attr.dataDiNascita}" /></dd>
-					    	</dl>
 					    	
-					    	<dl class="row">
-							  <dt class="col-sm-3 text-right">Codice Fiscale:</dt>
-							  <dd class="col-sm-9">${show_contribuente_attr.codiceFiscale}</dd>
-					    	</dl>
 					    	
 					    	<dl class="row">
 							  <dt class="col-sm-3 text-right">Stato :</dt>
-							  <dd class="col-sm-9">${show_contribuente_attr.indirizzo}</dd>
+							  <dd class="col-sm-9">${show_cartella_attr.stato}</dd>
 					    	</dl>
 					    	
+					    	<!-- info contribuente -->	
+					    	<p>
+							  <a class="btn btn-primary btn-sm" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+							    Info Regista
+							  </a>
+							</p>
+							<div class="collapse" id="collapseExample">
+							  <div class="card card-body">
+							  	<dl class="row">
+								  <dt class="col-sm-3 text-right">Nome:</dt>
+								  <dd class="col-sm-9">${show_cartella_attr.contribuente.nome}</dd>
+							   	</dl>
+							   	<dl class="row">
+								  <dt class="col-sm-3 text-right">Cognome:</dt>
+								  <dd class="col-sm-9">${show_cartella_attr.contribuente.cognome}</dd>
+							   	</dl>
+							   	<dl class="row">
+							  		<dt class="col-sm-3 text-right">Data di Nascita:</dt>
+							  		<dd class="col-sm-9"><fmt:formatDate type="date" value = "${show_cartella_attr.contribuente.dataDiNascita}" /></dd>
+					    		</dl>
+							   	<dl class="row">
+								  <dt class="col-sm-3 text-right">Codice Fiscale:</dt>
+								  <dd class="col-sm-9">${show_cartella_attr.contribuente.codiceFiscale}</dd>
+							   	</dl>
+							   	<dl class="row">
+								  <dt class="col-sm-3 text-right">Indirizzo:</dt>
+								  <dd class="col-sm-9">${show_cartella_attr.contribuente.indirizzo}</dd>
+							   	</dl>
+							    
+							  </div>
+					    	<!-- end info contribuente -->	
 					    	
 					    </div>
 					    <!-- end card body -->
 					    
 					    <div class='card-footer'>
-					        <a href="${pageContext.request.contextPath}/contribuente" class='btn btn-outline-secondary' style='width:80px'>
+					        <a href="${pageContext.request.contextPath}/cartellaesattoriale" class='btn btn-outline-secondary' style='width:80px'>
 					            <i class='fa fa-chevron-left'></i> Back
 					        </a>
 					    </div>

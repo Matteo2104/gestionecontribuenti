@@ -43,6 +43,12 @@ public class CartellaEsattorialeServiceImpl implements CartellaEsattorialeServic
 	}
 	
 	@Override
+	@Transactional(readOnly = true)
+	public CartellaEsattoriale caricaSingoloElementoEager(Long idCartellaEsattoriale) {
+		return repository.findByIdEager(idCartellaEsattoriale);
+	}
+	
+	@Override
 	@Transactional
 	public void rimuovi(Long id) {
 		repository.deleteById(id);

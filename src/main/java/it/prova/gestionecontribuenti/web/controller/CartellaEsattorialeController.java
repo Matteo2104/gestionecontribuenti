@@ -45,7 +45,7 @@ public class CartellaEsattorialeController {
 	}
 	
 	
-	// CICLO RICERCA
+	// CICLO RICERCA (non implementata)
 	@GetMapping("/search")
 	public String search() {
 		return "cartellaesattoriale/search";
@@ -74,7 +74,6 @@ public class CartellaEsattorialeController {
 		model.addAttribute("insert_cartella_attr", new CartellaEsattorialeDTO());
 		return "cartellaesattoriale/insert";
 	}
-	
 	@PostMapping("/save")
 	public String save(@Valid @ModelAttribute("insert_cartella_attr") CartellaEsattorialeDTO cartellaEsattorialeDTO,
 			BindingResult result, RedirectAttributes redirectAttrs) {
@@ -95,15 +94,15 @@ public class CartellaEsattorialeController {
 		return "redirect:/cartellaesattoriale";
 	}
 	
-	/*
+	
 	// CICLO VISUALIZZA
-	@GetMapping("/show/{idContribuente}")
-	public String show(@PathVariable Long idContribuente, Model model) {
-		model.addAttribute("show_contribuente_attr", ContribuenteDTO.buildContribuenteDTOFromModel(contribuenteService.caricaSingoloElemento(idContribuente)));
-		return "contribuente/show";
+	@GetMapping("/show/{idCartella}")
+	public String show(@PathVariable Long idCartella, Model model) {
+		model.addAttribute("show_cartella_attr", CartellaEsattorialeDTO.buildCartellaEsattorialeDTOFromModel(cartellaEsattorialeService.caricaSingoloElementoEager(idCartella), true));
+		return "cartellaesattoriale/show";
 	}
 	
-	
+	/*
 	// CICLO RIMOZIONE
 	@GetMapping("/delete/{idContribuente}")
 	public String delete(@PathVariable Long idContribuente, Model model) {

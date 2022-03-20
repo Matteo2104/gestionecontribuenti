@@ -21,4 +21,6 @@ public interface CartellaEsattorialeService {
 	public Page<CartellaEsattoriale> findByExampleWithPagination(CartellaEsattoriale example, Integer pageNo, Integer pageSize,
 			String sortBy);
 
+	public CartellaEsattoriale caricaSingoloElementoEager(Long idCartellaEsattoriale);
+
 }
