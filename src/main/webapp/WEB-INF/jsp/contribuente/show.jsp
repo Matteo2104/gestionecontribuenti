@@ -1,4 +1,5 @@
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!doctype html>
 <html lang="it" class="h-100" >
 	 <head>
@@ -52,9 +53,27 @@
 					    	</dl>
 					    	
 					    	<dl class="row">
-							  <dt class="col-sm-3 text-right">Stato :</dt>
+							  <dt class="col-sm-3 text-right">Indirizzo :</dt>
 							  <dd class="col-sm-9">${show_contribuente_attr.indirizzo}</dd>
 					    	</dl>
+					    	
+					    	<dl class="row">
+							  <dt class="col-sm-3 text-right">Totale importo Cartelle :</dt>
+							  <dd class="col-sm-9">${importo_totale}</dd>
+					    	</dl>
+					    	
+					    	<dl class="row">
+							  <dt class="col-sm-3 text-right">Totale Concluse e Pagate:</dt>
+							  <dd class="col-sm-9">${importo_concluso}</dd>
+					    	</dl>
+					    	
+					    	<c:if test="${importo_contenzioso!=0}">
+					    		<dl class="row">
+							  		<dt class="col-sm-3 text-right text-danger">Totale In Contenzioso:</dt>
+							  		<dd class="col-sm-9 text-danger" >${importo_contenzioso}</dd>
+					    		</dl>
+					    	</c:if>
+					    	
 					    	
 					    	
 					    </div>

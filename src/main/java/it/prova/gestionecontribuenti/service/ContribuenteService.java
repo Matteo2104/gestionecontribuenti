@@ -23,4 +23,6 @@ public interface ContribuenteService {
 
 	public List<Contribuente> cercaByCognomeENomeILike(String term);
 
+	public Contribuente caricaSingoloElementoEager(Long idContribuente);
+
 }

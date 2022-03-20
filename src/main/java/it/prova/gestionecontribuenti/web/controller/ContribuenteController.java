@@ -118,7 +118,24 @@ public class ContribuenteController {
 	// CICLO VISUALIZZA
 	@GetMapping("/show/{idContribuente}")
 	public String show(@PathVariable Long idContribuente, Model model) {
-		model.addAttribute("show_contribuente_attr", ContribuenteDTO.buildContribuenteDTOFromModel(contribuenteService.caricaSingoloElemento(idContribuente)));
+		Contribuente contribuente = contribuenteService.caricaSingoloElementoEager(idContribuente);
+		model.addAttribute("show_contribuente_attr", ContribuenteDTO.buildContribuenteDTOFromModel(contribuente));
+		
+		// calcolo l'importo totale
+		int importo_totale = 0;
+		int importo_concluso = 0;
+		int importo_contenzioso = 0;
+		for (CartellaEsattoriale cartella : contribuente.getCartelleEsattoriali()) {
+			importo_totale += cartella.getImporto();
+			if (cartella.getStato().equals(Stato.CONCLUSA))
+				importo_concluso += cartella.getImporto();
+			if (cartella.getStato().equals(Stato.IN_CONTENZIOSO))
+				importo_contenzioso += cartella.getImporto();
+		}
+		model.addAttribute("importo_totale", importo_totale);
+		model.addAttribute("importo_concluso", importo_concluso);
+		model.addAttribute("importo_contenzioso", importo_contenzioso);
+		
 		return "contribuente/show";
 	}
 	
