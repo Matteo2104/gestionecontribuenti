@@ -9,7 +9,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import it.prova.gestionecontribuenti.model.CartellaEsattoriale;
-import it.prova.gestionecontribuenti.model.Contribuente;
 import it.prova.gestionecontribuenti.model.Stato;
 
 public class CartellaEsattorialeDTO {
@@ -92,7 +91,16 @@ public class CartellaEsattorialeDTO {
 	
 	
 	public CartellaEsattoriale buildCartellaEsattorialeModel() {
-		return new CartellaEsattoriale(this.id, this.descrizione, this.importo, this.stato, this.contribuente.buildContribuenteModel());
+		//System.out.println(this);
+		//return new CartellaEsattoriale(this.id, this.descrizione, this.importo, this.stato, this.contribuente.buildContribuenteModel());
+		CartellaEsattoriale cartella = new CartellaEsattoriale();
+		
+		cartella.setDescrizione(this.descrizione);
+		cartella.setImporto(this.importo);
+		cartella.setStato(this.stato);
+		cartella.setContribuente(this.contribuente.buildContribuenteModel());
+		
+		return cartella;
 	}
 
 	public static CartellaEsattorialeDTO buildCartellaEsattorialeDTOFromModel(CartellaEsattoriale cartellaEsattorialeModel, boolean includeContribuente) {

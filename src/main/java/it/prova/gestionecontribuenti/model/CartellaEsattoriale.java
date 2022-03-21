@@ -22,21 +22,28 @@ public class CartellaEsattoriale {
 	private String descrizione;
 	
 	@Column(name="importo")
-	private int importo;
+	private Integer importo;
 	
 	@Column(name="stato")
 	private Stato stato;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "contribuente_id", nullable = false)
-	private Contribuente contribuente;
 	
+	
+	private Contribuente contribuente;
 	public CartellaEsattoriale() {}
 	public CartellaEsattoriale(String descrizione, int importo, Stato stato, Contribuente contribuente) {
 		this.descrizione = descrizione;
 		this.importo = importo;
 		this.stato = stato;
 		this.contribuente = contribuente;
+	}
+	public CartellaEsattoriale(Long id, String descrizione, int importo, Stato stato) {
+		this.id = id;
+		this.descrizione = descrizione;
+		this.importo = importo;
+		this.stato = stato;
 	}
 	public CartellaEsattoriale(Long id, String descrizione, int importo, Stato stato, Contribuente contribuente) {
 		this.id = id;
@@ -52,7 +59,7 @@ public class CartellaEsattoriale {
 	public String getDescrizione() {
 		return descrizione;
 	}
-	public int getImporto() {
+	public Integer getImporto() {
 		return importo;
 	}
 	public Stato getStato() {
@@ -67,7 +74,7 @@ public class CartellaEsattoriale {
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
 	}
-	public void setImporto(int importo) {
+	public void setImporto(Integer importo) {
 		this.importo = importo;
 	}
 	public void setStato(Stato stato) {
@@ -81,8 +88,11 @@ public class CartellaEsattoriale {
 	@Override
 	public String toString() {
 		return "CartellaEsattoriale [id=" + id + ", descrizione=" + descrizione + ", importo=" + importo + ", stato="
-				+ stato + "]";
+				+ stato + ", contribuente=" + contribuente + "]";
 	}
+	
+	
+	
 	
 	
 	

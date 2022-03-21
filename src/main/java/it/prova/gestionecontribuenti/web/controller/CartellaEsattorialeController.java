@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,7 +21,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import it.prova.gestionecontribuenti.dto.CartellaEsattorialeDTO;
 import it.prova.gestionecontribuenti.dto.ContribuenteDTO;
 import it.prova.gestionecontribuenti.model.CartellaEsattoriale;
-import it.prova.gestionecontribuenti.model.Contribuente;
 import it.prova.gestionecontribuenti.service.CartellaEsattorialeService;
 import it.prova.gestionecontribuenti.service.ContribuenteService;
 
@@ -50,21 +50,27 @@ public class CartellaEsattorialeController {
 	public String search() {
 		return "cartellaesattoriale/search";
 	}
+
 	@PostMapping("/find")
-	public String find(CartellaEsattorialeDTO example, Model model, RedirectAttributes redirect) {
+	public String find(CartellaEsattorialeDTO example, @RequestParam(defaultValue = "0") Integer pageNo,
+			@RequestParam(defaultValue = "10") Integer pageSize, @RequestParam(defaultValue = "id") String sortBy,
+			ModelMap model) {
+		//System.out.println(example.buildCartellaEsattorialeModel());
+		// System.out.println("");
+
+		List<CartellaEsattorialeDTO> resultListDTO = CartellaEsattorialeDTO
+				.createCartellaEsattorialeDTOListFromModelList(cartellaEsattorialeService
+						.findByExampleWithPagination(example.buildCartellaEsattorialeModel(), pageNo, pageSize, sortBy)
+						.toList(), false);
 		
-		//List<CartellaEsattorialeDTO> resultListDTO = CartellaEsattorialeDTO.createCartellaEsattorialeDTOListFromModelList(cartellaEsattorialeService.findByExampleWithPagination(example.buildCartellaEsattorialeModel(), null, null, null).toList(), false);
-		//List<CartellaEsattoriale> resultList = (List<CartellaEsattoriale>) cartellaEsattorialeService.findByExampleWithPagination(example.buildCartellaEsattorialeModel(), null, null, null);
-		
-		/*
-		for (CartellaEsattorialeDTO cartellaItem : resultListDTO) {
-			System.out.println(cartellaItem);
+		for (CartellaEsattorialeDTO cartella : resultListDTO ) {
+			System.out.println(cartella);
 		}
-		
+
 		model.addAttribute("cartella_list_attribute", resultListDTO);
 		return "cartellaesattoriale/list";
-		*/
-		return "redirect:/cartellaesattoriale";
+
+		//return "redirect:/cartellaesattoriale";
 	}
 	
 	

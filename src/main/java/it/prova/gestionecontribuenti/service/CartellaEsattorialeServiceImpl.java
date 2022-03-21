@@ -70,14 +70,14 @@ public class CartellaEsattorialeServiceImpl implements CartellaEsattorialeServic
 			if (StringUtils.isNotEmpty(example.getDescrizione()))
 				predicates.add(cb.like(cb.upper(root.get("descrizione")), "%" + example.getDescrizione().toUpperCase() + "%"));
 
-			if (example.getImporto() > 0)
+			if (example.getImporto() != null)
 				predicates.add(cb.greaterThanOrEqualTo(root.get("importo"), example.getImporto()));
 
 			if (example.getStato() != null)
 				predicates.add(cb.equal(root.get("stato"), example.getStato()));
 
-			if (example.getContribuente() != null)
-				predicates.add(cb.equal(cb.upper(root.get("contribuente.id")), example.getContribuente().getId()));
+			if (example.getContribuente() != null && example.getContribuente().getId() != null)
+				predicates.add(cb.equal(cb.upper(root.get("contribuente")), example.getContribuente().getId()));
 
 			return cb.and(predicates.toArray(new Predicate[predicates.size()]));
 		};
